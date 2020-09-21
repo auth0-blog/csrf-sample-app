@@ -32,12 +32,10 @@ app.get('/reviews', function (req, res) {
 });
 
 app.get('/session/new', function (req, res) {
-  const usernames = ['Bob', 'Alice', 'Charlie', 'Eve'];
-
   req.session.isValid = true;
-  req.session.username = usernames[Math.floor(Math.random()*usernames.length)];
-  req.session.email = `${req.session.username}@acme.com`;
-  res.end();
+  req.session.username = 'Alice';
+  req.session.email = 'alice@acme.com';
+  res.redirect('/');
 });
 
 app.get('/user', function (req, res) {

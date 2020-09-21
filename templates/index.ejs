@@ -79,7 +79,7 @@
         <fieldset>
           <textarea name="newReview" cols="80" rows="5" placeholder="Add your review"></textarea>
           <% if (!isValidSession) { %>
-            <div>You need a <a href="#" onclick="fetch('session/new')">valid session</a> to submit a review.</div>
+            <div>You need a <a href="session/new"">valid session</a> to submit a review.</div>
           <% } %>
           <button type="submit">Submit</button>  
         </fieldset>
