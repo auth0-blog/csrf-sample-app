@@ -33,6 +33,8 @@
           <label for="email">Your email:</label>
           <input name="email" type="email" value="<%= email %>" class="thin">
 
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
           <button type="submit" class="thin">Save</button></form>
         </fieldset>
       </form>

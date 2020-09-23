@@ -1,6 +1,7 @@
 const express = require("express");
 const session = require('express-session');
 const bodyParser = require('body-parser');
+const csrf = require('csurf');
 
 const port = 3000;
 const app = express();
@@ -20,15 +21,24 @@ app.use(session({
   }
 }));
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(csrf());
 
 app.get('/', function (req, res) {
-	res.render('index', {isValidSession: req.session.isValid, username: req.session.username, reviews});
+  res.render('index', {
+    isValidSession: req.session.isValid, 
+    username: req.session.username,
+    reviews
+  });
 });
 
 app.get('/reviews', function (req, res) {
   if (req.session.isValid && req.query.newReview) reviews.push(req.query.newReview);
 
-	res.render('index', {isValidSession: req.session.isValid, username: req.session.username, reviews});
+  res.render('index', {
+    isValidSession: req.session.isValid, 
+    username: req.session.username,
+    reviews
+  });
 });
 
 app.get('/session/new', function (req, res) {
@@ -40,7 +50,11 @@ app.get('/session/new', function (req, res) {
 
 app.get('/user', function (req, res) {
   if (req.session.isValid) {
-    res.render('user', {username: req.session.username, email: req.session.email});
+    res.render('user', {
+      username: req.session.username, 
+      email: req.session.email,
+      csrfToken: req.csrfToken()
+    });
   } else {
     res.redirect('/');
   }
