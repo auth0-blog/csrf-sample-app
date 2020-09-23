@@ -1,6 +1,8 @@
 const express = require("express");
 const session = require('express-session');
 const bodyParser = require('body-parser');
+const csrf = require('csurf');
+const cookieParser = require('cookie-parser');
 
 const port = 3000;
 const app = express();
@@ -20,6 +22,8 @@ app.use(session({
   }
 }));
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
+app.use(csrf({ cookie: true }));
 
 app.get('/', function (req, res) {
 	res.render('index', {
@@ -50,7 +54,8 @@ app.get('/user', function (req, res) {
   if (req.session.isValid) {
     res.render('user', {
       username: req.session.username,
-      email: req.session.email
+      email: req.session.email,
+      csrfToken: req.csrfToken()
     });
   } else {
     res.redirect('/');
