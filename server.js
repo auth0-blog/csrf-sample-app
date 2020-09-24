@@ -10,6 +10,16 @@ let reviews = [];
 app.set('views', './templates');
 app.set('view engine', 'ejs');
 
+app.use(function(req, res, next) {
+  const referer = (req.headers.referer? new URL(req.headers.referer).host: req.headers.host);
+
+  if (req.headers.host == (req.headers.origin || referer)) {
+    next();
+  } else {
+    return next(new Error('Unallowed origin'));
+  }
+});
+
 app.use(express.static('public'));
 app.use(session({
   secret: 'my-secret',
