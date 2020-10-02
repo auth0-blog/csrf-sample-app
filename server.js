@@ -29,16 +29,18 @@ app.get('/', function (req, res) {
 	res.render('index', {
     isValidSession: req.session.isValid,
     username: req.session.username,
+    csrfToken: req.csrfToken(),
     reviews
   });
 });
 
-app.get('/reviews', function (req, res) {
-  if (req.session.isValid && req.query.newReview) reviews.push(req.query.newReview);
+app.post('/reviews', function (req, res) {
+  if (req.session.isValid && req.body.newReview) reviews.push(req.body.newReview);
 
 	res.render('index', {
     isValidSession: req.session.isValid,
     username: req.session.username,
+    csrfToken: req.csrfToken(),
     reviews
   });
 });
