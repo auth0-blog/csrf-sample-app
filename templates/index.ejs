@@ -75,9 +75,10 @@
     </section>
 
     <section id="comments">
-      <form action="reviews">
+      <form method="post" action="reviews">
         <fieldset>
           <textarea name="newReview" cols="80" rows="5" placeholder="Add your review"></textarea>
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
           <% if (!isValidSession) { %>
             <div>You need a <a href="session/new"">valid session</a> to submit a review.</div>
           <% } %>
