@@ -12,8 +12,9 @@ app.set('view engine', 'ejs');
 
 app.use(function(req, res, next) {
   const referer = (req.headers.referer? new URL(req.headers.referer).host: req.headers.host);
+  const origin = (req.headers.origin? new URL(req.headers.origin).host : null);
 
-  if (req.headers.host == (req.headers.origin || referer)) {
+  if (req.headers.host == (origin || referer)) {
     next();
   } else {
     return next(new Error('Unallowed origin'));
@@ -39,8 +40,8 @@ app.get('/', function (req, res) {
   });
 });
 
-app.get('/reviews', function (req, res) {
-  if (req.session.isValid && req.query.newReview) reviews.push(req.query.newReview);
+app.post('/reviews', function (req, res) {
+  if (req.session.isValid && req.body.newReview) reviews.push(req.body.newReview);
 
 	res.render('index', {
     isValidSession: req.session.isValid,
