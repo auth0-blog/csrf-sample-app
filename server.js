@@ -29,8 +29,8 @@ app.get('/', function (req, res) {
   });
 });
 
-app.get('/reviews', function (req, res) {
-  if (req.session.isValid && req.query.newReview) reviews.push(req.query.newReview);
+app.post('/reviews', function (req, res) {
+  if (req.session.isValid && req.body.newReview) reviews.push(req.body.newReview);
 
 	res.render('index', {
     isValidSession: req.session.isValid,
@@ -68,4 +68,3 @@ app.post('/user', function (req, res) {
 });
 
 app.listen(port, () => console.log(`The server is listening at http://localhost:${port}`));
-
