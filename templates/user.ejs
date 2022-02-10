@@ -29,12 +29,16 @@
         <fieldset>
           <label for="username">Your name:</label>
           <input name="username" type="text" value="<%= username %>" class="thin">
+        </fieldset>
 
+        <fieldset>
           <label for="email">Your email:</label>
           <input name="email" type="email" value="<%= email %>" class="thin">
 
           <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        </fieldset>
 
+        <fieldset>
           <button type="submit" class="thin">Save</button></form>
         </fieldset>
       </form>
